@@ -163,23 +163,35 @@ document.addEventListener("DOMContentLoaded", function (e) {
 		}
 		
 		function checkGame(player) {
-			var diag1 = fields.filter((a,x) => x % (boardSize + 1) === 0).reduce((a,b) => a && b === player, true);
+			var diag1 = fields
+				.filter((a,x) => x % (boardSize + 1) === 0)
+				.reduce((a,b) => a && b === player, true);
+				
 			if(diag1) {
 				return player;
 			}
 			
-			var diag2 = fields.filter((a,x) => x % boardSize  + Math.floor(x/boardSize) === boardSize - 1).reduce((a,b) => a && b === player, true);
+			var diag2 = fields
+				.filter((a,x) => x % boardSize  + Math.floor(x/boardSize) === boardSize - 1)
+				.reduce((a,b) => a && b === player, true);
+			
 			if(diag2) {
 				return player;
 			}
 
 			for(var i = 0; i < boardSize; i++) {
-				var column = fields.filter((a,x) => x % boardSize === i).reduce((a,b) => a === b ? a : false, player);
+				var column = fields
+					.filter((a,x) => x % boardSize === i)
+					.reduce((a,b) => a === b ? a : false, player);
+					
 				if(column) {
 					return player;
 				}
 				
-				var row = fields.filter((a,x) => Math.floor(x / boardSize) === i).reduce((a,b) => a && a === b ? a : false, player);
+				var row = fields
+					.filter((a,x) => Math.floor(x / boardSize) === i)
+					.reduce((a,b) => a && a === b ? a : false, player);
+					
 				if(row) {
 					return player;				
 				}
